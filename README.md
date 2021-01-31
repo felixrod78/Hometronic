@@ -1,7 +1,7 @@
 # Hometronic
 
 Desarrollo de un cluster de k8s con Raspberry,Kubespray bajo Ubuntu 20.Server,Grafana y Mongo-DB.
-Sobre esta arquitectura la idea es montar un sistema de domótica casera con Hasssio,Zigbee y mas cosas...
+Sobre esta arquitectura la idea es montar un sistema de domótica casera con Hasssio,Zigbee y mas cosas...todo por llegar
 
 
 ## **Requisitos**

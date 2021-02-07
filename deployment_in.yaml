@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: example-ingress
+spec:
+  rules:
+  - host: aspnetcore.sample
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: aspnetcore-sample
+          servicePort: 80
+  - host: ghost.sample
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: ghost-blog
+          servicePort: 2368

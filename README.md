@@ -119,3 +119,18 @@ mv linux-amd64/helm /usr/local/bin/helm
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm install ingress ingress-nginx/ingress-nginx --set controller.image.repository="quay.io/kubernetes-ingress-controller/nginx-ingress-controller-arm64"
 ```
+
+**Primer deployment**
+```bash
+kubectl create namespace deployment
+kubectl create service nodeport nginx --tcp=80:80 -n deployment
+kubectl create deployment nginx --image=nginx  -n deployment
+# Usaremos traefik en este caso para instalar y configurar nuestro ingress
+#https://doc.traefik.io/traefik/v1.7/
+kubectl apply -f https://raw.githubusercontent.com/containous/traefik/v1.7/examples/k8s/traefik-rbac.yaml
+kubectl apply -f https://raw.githubusercontent.com/containous/traefik/v1.7/examples/k8s/traefik-ds.yaml
+kubectl create -f deployment_ing.yaml
+
+
+
+```

@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nginx1
+spec:
+  rules:
+  - host: felix.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginx1
+          servicePort: 80

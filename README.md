@@ -37,12 +37,20 @@ cp -rfp inventory/sample inventory/mycluster
 declare -a IPS=(192.168.0.&)
 CONFIG_FILE=inventory/mycluster/hosts.yaml python3 contrib/inventory_builder/inventory.py ${IPS[@]}
 ```
-need to edit the file
+Editamos el playbook roles/bootstrap-os/tasks/bootstrap-debian.yml y borramos lo siguiente
  ```bash
-roles/bootstrap-os/tasks/bootstrap-debian.yml
+
+- name: Install python
+  raw:
+    apt-get update && \
+    #DEBIAN_FRONTEND=noninteractive apt-get install -y python-minimal
+  become: true
+  environment: {}
+  when:
+    - need_bootstrap.rc != 0
 ```
-Comentar :       DEBIAN_FRONTEND=noninteractive apt-get install -y python3-minimal
-Ejecutar: 
+
+Lanzamos la instalación de k8s: 
 ```bash
     ansible-playbook -i inventory/mycluster/hosts.yaml  --become --become-user=root cluster.yml \
     -e "ansible_distribution_release=bionic kube_resolv_conf=/run/systemd/resolve/resolv.conf local_path_provisioner_enabled=true"
@@ -50,7 +58,7 @@ Ejecutar:
 
 **Info importante: **
  bionic since there are no docker images for 20.04 version
-  /run/systemd/resolve/resolv.conf since core-nds will be crashed by loop protection
+  /run/systemd/resolve/resolv.conf since core-dns will be crashed by loop protection
  dashboard_enabled=false useless application from my point of view
  We want to have ability to provision pv right after deployment
 
@@ -130,7 +138,3 @@ kubectl create deployment nginx --image=nginx  -n deployment
 kubectl apply -f https://raw.githubusercontent.com/containous/traefik/v1.7/examples/k8s/traefik-rbac.yaml
 kubectl apply -f https://raw.githubusercontent.com/containous/traefik/v1.7/examples/k8s/traefik-ds.yaml
 kubectl create -f deployment_ing.yaml
-
-
-
-```

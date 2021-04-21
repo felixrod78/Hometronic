@@ -2,4 +2,23 @@ https://www.returngis.net/2020/04/como-trabajar-con-el-objeto-deployment-en-kube
 
 sudo apt-get install --reinstall ubuntu-desktop
 sudo timedatectl set-timezone Europe/Madrid
+https://betterprogramming.pub/how-to-expose-your-services-with-kubernetes-ingress-7f34eb6c9b5aç
+
+Crear web site publica 
+Pasos:
+
+
+kubectl create namespace deployment
+
+Despliego deployment nginx 
+kubectl apply -f deployment/dpy_nginx.yaml 
+Check
+kubectl describe deployment nginx -n deployment
+Despliego servicio para acceder desde fuera con puerto aleatorio
+kubectl apply -f deployment/svc_nginx.yaml
+
+
+
+
+
 

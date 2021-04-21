@@ -1,1 +1,5 @@
 https://www.returngis.net/2020/04/como-trabajar-con-el-objeto-deployment-en-kubernetes/
+
+sudo apt-get install --reinstall ubuntu-desktop
+sudo timedatectl set-timezone Europe/Madrid
+

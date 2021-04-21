@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-name-based
+  namespace: deployment
+  annotations:
+    traefik.ingress.kubernetes.io/affinity: "true"
+spec:
+  rules:
+  - host: felix.com
+    http:
+      paths:
+      - path: "/"
+        backend:
+          serviceName: nginx
+          servicePort: 80
